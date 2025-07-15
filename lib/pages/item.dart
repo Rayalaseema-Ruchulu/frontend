@@ -37,45 +37,69 @@ class _ItemState extends State<Item> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1020, maxHeight: 1000), // Account for padding
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Align(alignment: Alignment.topRight, child: CloseButton()),
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    if (constraints.maxWidth > 600) {
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(child: itemImage()),
-                          const SizedBox(width: 15),
-                          Expanded(
-                            child: itemDetails(context),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          itemImage(),
-                          const SizedBox(height: 10),
-                          itemDetails(context),
-                        ],
-                      );
-                    }
-                  },
-                ),
-              ],
+        constraints: const BoxConstraints(
+          maxWidth: 1020,
+          maxHeight: 1000,
+        ), // Account for padding
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      widget._menuItem.name,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  const Align(
+                    alignment: Alignment.topRight,
+                    child: CloseButton(),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  child: LayoutBuilder(
+                    builder: (
+                      BuildContext context,
+                      BoxConstraints constraints,
+                    ) {
+                      if (constraints.maxWidth > 600) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(child: itemImage()),
+                            const SizedBox(width: 15),
+                            Expanded(child: itemDetails(context)),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            itemImage(),
+                            const SizedBox(height: 10),
+                            itemDetails(context),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
