@@ -46,7 +46,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3704e8a5bb8fbda80d497bf80f4e0cf599c8136f"
+      resolved-ref: e59035b3204f55f8119db6012780e4fd64d184ac
       url: "https://github.com/Rayalaseema-Ruchulu/common.git"
     source: git
     version: "0.0.1"
