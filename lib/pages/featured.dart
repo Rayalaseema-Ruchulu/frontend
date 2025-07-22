@@ -1,7 +1,11 @@
+import 'package:common/models/category.dart';
+import 'package:common/models/menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:rr_app/app.dart';
+import 'package:rr_app/widgets/category.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class FeaturedPage extends StatelessWidget {
+  const FeaturedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,24 @@ class _Items extends StatefulWidget {
 }
 
 class _ItemsState extends State<_Items> {
+  late final Future<List<(CategoryOrIngredient, List<MenuItem>)>> _items;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _items = _getItems();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return CategoryUtils.items(_items);
+  }
+
+  Future<List<(CategoryOrIngredient, List<MenuItem>)>> _getItems() async {
+    final client = await App.apiClient;
+    final categories = await client.getFeaturedCategories();
+
+    return CategoryUtils.loadItemsFromCategories(client, categories);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:rr_app/pages/featured.dart';
 import 'package:rr_app/pages/menu.dart';
 
@@ -16,8 +17,7 @@ class NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('RR'),
+        title: SvgPicture.asset('assets/icons/icon.svg'),
         centerTitle: true,
       ),
       bottomNavigationBar: NavigationBar(
@@ -36,7 +36,7 @@ class NavigationState extends State<Navigation> {
           NavigationDestination(icon: Icon(Icons.menu), label: 'Menu'),
         ],
       ),
-      body: const <Widget>[HomePage(), MenuPage()][pageIndex],
+      body: const <Widget>[FeaturedPage(), MenuPage()][pageIndex],
     );
   }
 }
