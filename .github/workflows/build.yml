@@ -43,7 +43,7 @@ jobs:
 
       # Build for Web
       - name: Build for Web
-        run: flutter build web --release -wasm
+        run: flutter build web --release --wasm
       
       - name: Compress web artifacts
         run: zip -r web.zip build/web/*
