@@ -50,7 +50,7 @@ jobs:
       
       # Create release
       - name: Release
-        uses: ncipollo/release-action@
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "web.zip, build/app/outputs/flutter-apk/*.apk, build/app/outputs/bundle/release/*.aab"
           prerelease: true
