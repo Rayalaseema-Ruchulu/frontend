@@ -1,0 +1,58 @@
+name: "Build & Release"
+on:
+  push:
+    branches: ['main']
+
+jobs: 
+  build:
+    name: Build & Release
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Repo
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Setup Java for Android
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+
+      # Setup flutter
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with: 
+          channel: stable
+
+      # Install Dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # TODO: Add key signing for Android
+
+      # Build APK for Android
+      - name: Build APK
+        run: flutter build apk --release --split-per-abi
+          
+      # Build App Bundle for Android
+      - name: Build App Bundle
+        run: flutter build appbundle --release
+
+      # TODO: Build for iOS
+
+      # Build for Web
+      - name: Build for Web
+        run: flutter build web --release -wasm
+      
+      - name: Compress web artifacts
+        run: zip -r web.zip build/web/*
+      
+      # Create release
+      - name: Release
+        uses: ncipollo/release-action@
+        with:
+          artifacts: "web.zip, build/app/outputs/flutter-apk/*.apk, build/app/outputs/bundle/release/*.aab"
+          prerelease: true
+          allowUpdates: true
+          removeArtifacts: true
