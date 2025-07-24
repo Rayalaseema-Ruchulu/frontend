@@ -36,6 +36,9 @@ dependencies:
   common:
     git: 
       url: https://github.com/Rayalaseema-Ruchulu/common.git
+
+  cupertino_icons: ^1.0.8
+
   vector_graphics: ^1.1.19
 
 dev_dependencies:
