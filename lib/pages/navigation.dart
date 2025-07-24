@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:rr_app/pages/featured.dart';
 import 'package:rr_app/pages/menu.dart';
+import 'package:vector_graphics/vector_graphics_compat.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -11,13 +11,17 @@ class Navigation extends StatefulWidget {
 }
 
 class NavigationState extends State<Navigation> {
+  static const Widget logo = VectorGraphic(
+    loader: AssetBytesLoader('assets/icons/icon.svg'),
+  );
+
   int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SvgPicture.asset('assets/icons/icon.svg'),
+        title: logo,
         centerTitle: true,
       ),
       bottomNavigationBar: NavigationBar(
