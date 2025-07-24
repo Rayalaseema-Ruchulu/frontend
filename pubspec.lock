@@ -78,7 +78,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "63356ba42923fe40537d1ffeb0f6fc2caa59cfcd"
+      resolved-ref: "6835090285e620131530b849a7f99d3be4d0cf10"
       url: "https://github.com/Rayalaseema-Ruchulu/common.git"
     source: git
     version: "0.0.1"
