@@ -14,6 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           fetch-tags: true
 
       # Setup Java for Android
@@ -79,7 +80,7 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag "$TAG_NAME" -m "Release $TAG_NAME"
-          git push origin "$TAG_NAME"
+          git push origin "$TAG_NAME" --tags
           echo "Created and pushed tag $TAG_NAME"
 
       # Create release
