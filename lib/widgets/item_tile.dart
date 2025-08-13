@@ -58,12 +58,14 @@ class _ItemTileState extends State<ItemTile> {
                   future: _thumbnail,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      return Image(
-                        image: snapshot.data!,
-                        fit: BoxFit.cover,
-                        height: 100,
-                        width: 100,
-                      );
+                      return snapshot.data != null
+                          ? Image(
+                            image: snapshot.data!,
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                          )
+                          : const Icon(Icons.image_not_supported_outlined);
                     } else {
                       return const Center(child: CircularProgressIndicator());
                     }
